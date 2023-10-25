@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [ -n "${1+x}" ]; then
+    target_path=$1
+else
+    target_path=$(dirname $0)
+fi
+
+echo "Running ruff..."
+ruff --fix $target_path
+echo "Running mypy..."
+mypy $target_path
+echo "Running black..."
+black $target_path
+
