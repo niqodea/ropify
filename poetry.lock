@@ -162,6 +162,47 @@ docs = ["furo (>=2023.7.26)", "proselint (>=0.13)", "sphinx (>=7.1.1)", "sphinx-
 test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=7.4)", "pytest-cov (>=4.1)", "pytest-mock (>=3.11.1)"]
 
 [[package]]
+name = "pytoolconfig"
+version = "1.2.6"
+description = "Python tool configuration"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "pytoolconfig-1.2.6-py3-none-any.whl", hash = "sha256:e8b2e538f11dbabc4617884d45401e0105e2d7db920cb8ae6baa94d66126a8e3"},
+    {file = "pytoolconfig-1.2.6.tar.gz", hash = "sha256:f2d00ea4f8cbdffd3006780ba51016618c835b338f634e3f7f8b2715b1710889"},
+]
+
+[package.dependencies]
+packaging = ">=22.0"
+platformdirs = {version = ">=1.4.4", optional = true, markers = "extra == \"global\""}
+tomli = {version = ">=2.0.1", markers = "python_version < \"3.11\""}
+
+[package.extras]
+doc = ["sphinx (>=4.5.0)", "tabulate (>=0.8.9)"]
+gendocs = ["pytoolconfig[doc]", "sphinx (>=4.5.0)", "sphinx-autodoc-typehints (>=1.18.1)", "sphinx-rtd-theme (>=1.0.0)"]
+global = ["platformdirs (>=1.4.4)"]
+validation = ["pydantic (>=1.7.4)"]
+
+[[package]]
+name = "rope"
+version = "1.10.0"
+description = "a python refactoring library..."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "rope-1.10.0-py3-none-any.whl", hash = "sha256:4e9f06d7296708a8a6518590c49352c99394053d91fde5b1d74c9ffc85c76d5b"},
+    {file = "rope-1.10.0.tar.gz", hash = "sha256:14bfcc7dfea69fa32c53db0667e86e321ef059de555c7f8101a0cb91c8d85a55"},
+]
+
+[package.dependencies]
+pytoolconfig = {version = ">=1.2.2", extras = ["global"]}
+
+[package.extras]
+dev = ["build (>=0.7.0)", "pre-commit (>=2.20.0)", "pytest (>=7.0.1)", "pytest-timeout (>=2.1.0)"]
+doc = ["pytoolconfig[doc]", "sphinx (>=4.5.0)", "sphinx-autodoc-typehints (>=1.18.1)", "sphinx-rtd-theme (>=1.0.0)"]
+release = ["pip-tools (>=6.12.1)", "toml (>=0.10.2)", "twine (>=4.0.2)"]
+
+[[package]]
 name = "ruff"
 version = "0.1.2"
 description = "An extremely fast Python linter, written in Rust."
@@ -212,4 +253,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "9bd56f0156b86e69ad4723367eb7aacbf33e60ce22b61f18d8838e3d26916535"
+content-hash = "f05b4a424d1a5d540276cc544c077214844977077d42148a7de3ef009d3d8480"
