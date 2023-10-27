@@ -8,15 +8,16 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-rope = "^1.10.0"
+
 click = "^8.1.7"
+rope = "^1.10.0"
 setuptools = "^68.2.2"
 
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.10.1"
-ruff = "^0.1.2"
 mypy = "^1.6.1"
+ruff = "^0.1.2"
 
 # ignore mypy missing imports for rope
 [[tool.mypy.overrides]]
@@ -25,12 +26,12 @@ ignore_missing_imports = true
 
 [tool.ruff.lint]
 select = [
+  "B",  # flake8-bugbear
   "E",  # pycodestyle
   "F",  # Pyflakes
-  "UP",  # pyupgrade
-  "B",  # flake8-bugbear
-  "SIM",  # flake8-simplify
   "I",  # isort
+  "SIM",  # flake8-simplify
+  "UP",  # pyupgrade
 ]
 
 [build-system]
