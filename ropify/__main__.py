@@ -98,9 +98,9 @@ def move(
 @click.argument("name", type=click.STRING)
 @project_option()
 @ropefolder_option()
-def show_autoimports(name: str, project: Path, ropefolder: str | None) -> None:
+def show_imports(name: str, project: Path, ropefolder: str | None) -> None:
     """
-    Print the candidate autoimports for a given name to stdout.
+    Print the candidate imports for a given name to stdout.
 
     :param name: The name to search for.
     :param project: The project to work on.
