@@ -1,16 +1,13 @@
-# Ropify: The Simple Rope CLI Wrapper
+# Ropify: The Simple Rope CLI Wrapper for Editors
 
-Ropify is designed to simplify the experience of using [rope](https://github.com/python-rope/rope), a renowned refactoring library in Python.
-With the goal of being lightweight, ropify targets developers who love using editors like Vim and NeoVim but want to steer clear of the overhead of setting up Python environments just for refactoring capabilities.
-If you don't need all the bells and whistles provided by [ropevim](https://github.com/python-rope/ropevim) and desire a leaner setup, ropify is for you!
+Ropify is a CLI tool streamlining the experience of leveraging [rope](https://github.com/python-rope/rope) to refactor Python code, designed to be used as an API for editors like Vim/NeoVim[^1].
 
-## Features 🌟
-
-- **Lean Integration**: Ideal for Vim and NeoVim users who want to keep their setups lean and avoid setting up a Python environment for their editor.
-- **Essential Commands**: Ropify focuses on offering just a handful of rope's most used functionalities for a streamlined experience.
+Made for developers who prefer a streamlined approach, ropify is an ideal choice for those hesitant about installing [ropevim](https://github.com/python-rope/ropevim) due to its heavy requirements or vimscript foundation.
+If you find ropevim's exhaustive features a tad much and are in pursuit of a more minimalist alternative, look no further than ropify!
 
 ## Current Commands 🔍
 
-- `move`: Move global functions and classes between Python modules.
-- `show-imports`: Display all potential imports for a specified name, outputting to stdout.
+- `ropify move`: Move global functions and classes between Python modules.
+- `ropify show-imports`: Display all potential imports for a specified name, outputting to stdout.
 
+[^1]: The CLI's user experience is also influenced by the `rope` APIs, which are primarily designed with editor integrations in mind.
