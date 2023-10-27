@@ -17,6 +17,11 @@ black = "^23.10.1"
 ruff = "^0.1.2"
 mypy = "^1.6.1"
 
+# ignore mypy missing imports for rope
+[[tool.mypy.overrides]]
+module = "rope.*"
+ignore_missing_imports = true
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
