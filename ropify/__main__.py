@@ -12,7 +12,7 @@ from rope.refactor.move import create_move
 
 
 @click.group()
-def cli():
+def cli() -> None:
     pass
 
 
@@ -129,5 +129,5 @@ def show_autoimports(name: str, project: Path, ropefolder: str | None) -> None:
         click.echo(f"from {module} import {name}")
 
 
-if __name__ == "__main__":
+def main() -> None:
     cli()
