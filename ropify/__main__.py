@@ -44,8 +44,11 @@ def ropefolder_option() -> Callable[[FC], FC]:
 )
 @click.option(
     "--destination",
-    type=click.Path(exists=True, file_okay=False, path_type=Path),
-    help="The path where to move the definition to.",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    help=(
+        "The path where to move the definition to. "
+        "If not provided, the user will be prompted for it."
+    ),
 )
 @project_option()
 @ropefolder_option()
@@ -57,13 +60,11 @@ def move(
     ropefolder: str | None,
 ) -> None:
     """
-    Move the definition of a class or function to another file.
+    Move the definition of a global symbol to another file.
 
-    :param resource: The path to the file containing the definition.
-    :param offset: The offset of the definition in the file.
-    :param destination: The path where to move the definition to.
-    :param project: The project to work on.
-    :param ropefolder: The location of the rope folder relative to the project root.
+    \b
+    RESOURCE: The path to the file containing the symbol to move.
+    OFFSET: The byte offset of the symbol within the file.
     """
 
     if ropefolder is not None:
@@ -102,9 +103,8 @@ def show_imports(name: str, project: Path, ropefolder: str | None) -> None:
     """
     Print the candidate imports for a given name to stdout.
 
-    :param name: The name to search for.
-    :param project: The project to work on.
-    :param ropefolder: The location of the rope folder relative to the project root.
+    \b
+    NAME: The name to get candidate imports for.
     """
 
     if ropefolder is not None:
