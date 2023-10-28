@@ -1,6 +1,6 @@
 # Ropify: The Simple Rope CLI Wrapper for Editors
 
-Ropify is a CLI tool streamlining the experience of leveraging [rope](https://github.com/python-rope/rope) to refactor Python code, designed to be used as an API for editors like Vim/NeoVim[^1].
+Ropify is a CLI tool streamlining the experience of leveraging [Rope](https://github.com/python-rope/rope) to refactor Python code, designed to be used as an API for editors like Vim/Neovim[^1].
 
 Made for developers who prefer a streamlined approach, Ropify is an ideal choice for those hesitant about installing [ropevim](https://github.com/python-rope/ropevim) due to its heavy requirements or vimscript foundation.
 If you find ropevim's exhaustive features a tad much and are in pursuit of a more minimalist alternative, look no further than Ropify!
@@ -35,4 +35,6 @@ ropify --help
 - `ropify move`: Move global functions and classes between Python modules.
 - `ropify show-imports`: Display all potential imports for a specified name, outputting to stdout.
 
-[^1]: The CLI's user experience is also influenced by the `rope` APIs, which are primarily designed with editor integrations in mind.
+The `nvim-bindings.lua` file contains definitions of corresponding Neovim lua bindings to get you started.
+
+[^1]: The CLI's user experience is also influenced by the rope APIs, which are primarily designed with editor integrations in mind.
