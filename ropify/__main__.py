@@ -5,6 +5,7 @@ from typing import Callable
 
 import click
 from click.decorators import FC
+from rope.base.fscommands import FileSystemCommands
 from rope.base.libutils import is_python_file, path_to_resource
 from rope.base.project import Project
 from rope.base.pynames import ImportedModule
@@ -32,6 +33,13 @@ def ropefolder_option() -> Callable[[FC], FC]:
         type=click.STRING,
         help="The location of the rope folder relative to the project root.",
     )
+
+
+def _create_rope_project(project: Path, ropefolder: str | None) -> Project:
+    if ropefolder is not None:
+        return Project(project, fscommands=FileSystemCommands(), ropefolder=ropefolder)
+    else:
+        return Project(project, fscommands=FileSystemCommands())
 
 
 @cli.command()
@@ -62,10 +70,7 @@ def move_module(
     RESOURCE: The path to the module file.
     """
 
-    if ropefolder is not None:
-        rope_project = Project(project, ropefolder=ropefolder)
-    else:
-        rope_project = Project(project)
+    rope_project = _create_rope_project(project, ropefolder)
 
     rope_resource = path_to_resource(rope_project, resource)
     move = create_move(rope_project, rope_resource)
@@ -126,10 +131,7 @@ def move_symbol(
     OFFSET: The byte offset of the symbol within the file.
     """
 
-    if ropefolder is not None:
-        rope_project = Project(project, ropefolder=ropefolder)
-    else:
-        rope_project = Project(project)
+    rope_project = _create_rope_project(project, ropefolder)
 
     rope_resource = path_to_resource(rope_project, resource)
     move = create_move(rope_project, rope_resource, offset)
@@ -172,10 +174,7 @@ def show_imports(name: str, project: Path, ropefolder: str | None) -> None:
     NAME: The name to get candidate imports for.
     """
 
-    if ropefolder is not None:
-        rope_project = Project(project, ropefolder=ropefolder)
-    else:
-        rope_project = Project(project)
+    rope_project = _create_rope_project(project, ropefolder)
 
     autoimport = AutoImport(rope_project, memory=False)
 
