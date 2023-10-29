@@ -7,6 +7,7 @@ import click
 from click.decorators import FC
 from rope.base.libutils import is_python_file, path_to_resource
 from rope.base.project import Project
+from rope.base.pynames import ImportedModule
 from rope.contrib.autoimport.sqlite import AutoImport
 from rope.refactor.move import create_move
 
@@ -38,6 +39,64 @@ def ropefolder_option() -> Callable[[FC], FC]:
     "resource",
     type=click.Path(exists=True, dir_okay=False, path_type=Path),
 )
+@click.option(
+    "--destination",
+    type=click.Path(exists=True, file_okay=False, path_type=Path),
+    help=(
+        "The path to the package where to move the module. "
+        "If not provided, the user will be prompted for it."
+    ),
+)
+@project_option()
+@ropefolder_option()
+def move_module(
+    resource: Path,
+    destination: Path | None,
+    project: Path,
+    ropefolder: str | None,
+) -> None:
+    """
+    Move a module to another package.
+
+    \b
+    RESOURCE: The path to the module file.
+    """
+
+    if ropefolder is not None:
+        rope_project = Project(project, ropefolder=ropefolder)
+    else:
+        rope_project = Project(project)
+
+    rope_resource = path_to_resource(rope_project, resource)
+    move = create_move(rope_project, rope_resource)
+    module_name = move.old_name
+    click.echo(f"Moving definition of `{module_name}`")
+
+    module_source = rope_resource
+    click.echo(f"Definition is currently at: {module_source.path}")
+
+    if destination is None:
+        destination = click.prompt(
+            "Enter the destination for the module",
+            type=click.Path(exists=False, path_type=Path),
+        )
+
+    module_destination = path_to_resource(rope_project, destination)
+
+    if not module_destination.is_folder():
+        click.echo("The destination must be a python package")
+        exit(1)
+
+    changes = move.get_changes(module_destination)
+    rope_project.do(changes)
+    click.echo(f"Module `{module_name}` moved to: {module_destination.path}")
+
+
+@cli.command()
+@click.argument(
+    "resource",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+)
 @click.argument(
     "offset",
     type=click.IntRange(min=0),
@@ -52,7 +111,7 @@ def ropefolder_option() -> Callable[[FC], FC]:
 )
 @project_option()
 @ropefolder_option()
-def move(
+def move_symbol(
     resource: Path,
     offset: int,
     destination: Path | None,
@@ -74,25 +133,31 @@ def move(
 
     rope_resource = path_to_resource(rope_project, resource)
     move = create_move(rope_project, rope_resource, offset)
-    object_name = move.old_name
-    rope_source = move.old_pyname.get_definition_location()[0].get_resource()
-    click.echo(f"Definition of `{object_name}` is currently at: {rope_source.path}")
+    symbol_name = move.old_name
+    click.echo(f"Moving definition of `{symbol_name}`")
+
+    if isinstance(move.old_pyname, ImportedModule):
+        click.echo("ERROR: Cannot move modules, use `ropify move-module` instead.")
+        exit(1)
+
+    symbol_def_source = move.old_pyname.get_definition_location()[0].get_resource()
+    click.echo(f"Definition is currently at: {symbol_def_source.path}")
 
     if destination is None:
         destination = click.prompt(
-            "Enter the new file for the definition",
+            "Enter the destination file for the definition",
             type=click.Path(exists=True, dir_okay=False, path_type=Path),
         )
 
-    rope_destination = path_to_resource(rope_project, destination)
+    symbol_def_destination = path_to_resource(rope_project, destination)
 
-    if not is_python_file(rope_project, rope_destination):
+    if not is_python_file(rope_project, symbol_def_destination):
         click.echo("The destination must be a python file")
         exit(1)
 
-    changes = move.get_changes(rope_destination)
+    changes = move.get_changes(symbol_def_destination)
     rope_project.do(changes)
-    click.echo(f"Definition of `{object_name}` moved to: {rope_destination.path}")
+    click.echo(f"Definition of `{symbol_name}` moved to: {symbol_def_destination.path}")
 
 
 @cli.command()

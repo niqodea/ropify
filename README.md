@@ -32,7 +32,8 @@ ropify --help
 
 ## Current Commands 🔍
 
-- `ropify move`: Move global functions and classes between Python modules.
+- `ropify move-symbol`: Move class or function to another module.
+- `ropify move-module`: Move module to another package.
 - `ropify show-imports`: Display all potential imports for a specified name, outputting to stdout.
 
 The `nvim-bindings.lua` file contains definitions of corresponding Neovim lua bindings to get you started.
