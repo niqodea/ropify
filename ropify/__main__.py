@@ -196,3 +196,7 @@ def show_imports(name: str, project: Path, ropefolder: str | None) -> None:
 
 def main() -> None:
     cli()
+
+
+if __name__ == "__main__":
+    main()
