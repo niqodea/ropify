@@ -36,6 +36,7 @@ def ropefolder_option() -> Callable[[FC], FC]:
 
 
 def _create_rope_project(project: Path, ropefolder: str | None) -> Project:
+    # Git fscommands complain when files are untracked, so we use the default instead
     if ropefolder is not None:
         return Project(project, fscommands=FileSystemCommands(), ropefolder=ropefolder)
     else:
