@@ -189,10 +189,8 @@ version = "1.10.0"
 description = "a python refactoring library..."
 optional = false
 python-versions = ">=3.8"
-files = [
-    {file = "rope-1.10.0-py3-none-any.whl", hash = "sha256:4e9f06d7296708a8a6518590c49352c99394053d91fde5b1d74c9ffc85c76d5b"},
-    {file = "rope-1.10.0.tar.gz", hash = "sha256:14bfcc7dfea69fa32c53db0667e86e321ef059de555c7f8101a0cb91c8d85a55"},
-]
+files = []
+develop = false
 
 [package.dependencies]
 pytoolconfig = {version = ">=1.2.2", extras = ["global"]}
@@ -201,6 +199,12 @@ pytoolconfig = {version = ">=1.2.2", extras = ["global"]}
 dev = ["build (>=0.7.0)", "pre-commit (>=2.20.0)", "pytest (>=7.0.1)", "pytest-timeout (>=2.1.0)"]
 doc = ["pytoolconfig[doc]", "sphinx (>=4.5.0)", "sphinx-autodoc-typehints (>=1.18.1)", "sphinx-rtd-theme (>=1.0.0)"]
 release = ["pip-tools (>=6.12.1)", "toml (>=0.10.2)", "twine (>=4.0.2)"]
+
+[package.source]
+type = "git"
+url = "https://github.com/python-rope/rope.git"
+reference = "21e4804"
+resolved_reference = "21e4804e71585d97dc6d2b97fac6cd9d4dddc009"
 
 [[package]]
 name = "ruff"
@@ -269,4 +273,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "a10a81d81b50265c3096a773e65b038c5659ac83788d845c6038b6c94cb61ad2"
+content-hash = "af5e3a5631f1e0aca964e60cce4a7719a706abe34ba6904c7e428635121ca1dc"

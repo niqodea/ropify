@@ -10,7 +10,8 @@ readme = "README.md"
 python = "^3.10"
 
 click = "^8.1.7"
-rope = "^1.10.0"
+# This revision fixes this issue: https://github.com/python-rope/rope/issues/715
+rope = { git = "https://github.com/python-rope/rope.git", rev = "21e4804" }
 setuptools = "^68.2.2"
 
 
