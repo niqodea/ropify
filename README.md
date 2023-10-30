@@ -30,12 +30,14 @@ You can verify the installation with:
 ropify --help
 ```
 
+After the setup, integrate the commands in `nvim-bindings.lua` into your Neovim config to use Ropify from your editor.[^2]
+
 ## Current Commands 🔍
 
 - `ropify move-symbol`: Move class or function to another module.
 - `ropify move-module`: Move module to another package.
 - `ropify show-imports`: Display all potential imports for a specified name, outputting to stdout.
 
-The `nvim-bindings.lua` file contains definitions of corresponding Neovim lua bindings to get you started.
 
 [^1]: The CLI's user experience is also influenced by the rope APIs, which are primarily designed with editor integrations in mind.
+[^2]: TODO: Add vimscript bindings.
