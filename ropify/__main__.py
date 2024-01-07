@@ -1,4 +1,4 @@
-import sys
+import os
 from contextlib import redirect_stdout
 from pathlib import Path
 from typing import Callable
@@ -179,7 +179,8 @@ def show_imports(name: str, project: Path, ropefolder: str | None) -> None:
 
     autoimport = AutoImport(rope_project, memory=False)
 
-    with redirect_stdout(sys.stderr):
+    # Silence rope complaining about syntax errors during cache generation
+    with open(os.devnull, "w") as f, redirect_stdout(f):
         autoimport.generate_cache()
         autoimport.generate_modules_cache()
 
